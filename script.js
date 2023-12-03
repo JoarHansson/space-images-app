@@ -1,8 +1,8 @@
 const baseUrl =
   "https://api.nasa.gov/planetary/apod?api_key=v3uFn7uhfV3YcTTafG142dqcDpC1FClGV4xWMmeM";
 
-const buttonRandomImage = document.querySelector(".button-random-image");
-const dateInput = document.querySelector(".input-date");
+const buttonsRandomImage = document.querySelectorAll(".button-random-image");
+const dateInputs = document.querySelectorAll(".input-date");
 const containerImage = document.querySelector(".container-image");
 const buttonInfo = document.querySelector(".button-info");
 
@@ -21,7 +21,8 @@ async function fetchData(url) {
     console.log("2", data);
 
     if (response.status != 200) {
-      const errorMessage = document.createElement("div");
+      const errorMessage = document.createElement("p");
+      errorMessage.classList.add("error-message");
       errorMessage.textContent = data.msg; // the error message provided in the object
       containerImage.appendChild(errorMessage);
     } else {
@@ -39,7 +40,8 @@ async function fetchData(url) {
         image.src = dataChecked.url;
         containerImage.appendChild(image);
       } else if (dataChecked.media_type === "video") {
-        const errorMessageVideo = document.createElement("div");
+        const errorMessageVideo = document.createElement("p");
+        errorMessageVideo.classList.add("error-message");
 
         // display error message for 5 sec, then get a new random image:
         let i = 5;
@@ -103,13 +105,17 @@ async function fetchData(url) {
 }
 
 // get image by date
-dateInput.addEventListener("change", (event) => {
-  fetchData(baseUrl + "&date=" + event.target.value);
+dateInputs.forEach((input) => {
+  input.addEventListener("change", (event) => {
+    fetchData(baseUrl + "&date=" + event.target.value);
+  });
 });
 
 // get a random image
-buttonRandomImage.addEventListener("click", () => {
-  fetchData(baseUrl + "&count=1");
+buttonsRandomImage.forEach((button) => {
+  button.addEventListener("click", () => {
+    fetchData(baseUrl + "&count=1");
+  });
 });
 
 // make sure large images scales down to fit between header and footer
