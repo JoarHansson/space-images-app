@@ -30,7 +30,7 @@ h1 {
   margin: 0;
 }
 
-#container-image {
+.container-image {
   width: 100%;
   height: auto;
   display: flex;
@@ -38,21 +38,38 @@ h1 {
   justify-content: center;
 }
 
-#container-image img {
+.container-image img {
   max-width: 100%;
   max-height: 100%;
 }
 
-#github-logo img,
-#container-info {
+.github-logo img,
+.button-info {
   height: 2rem;
   width: 2rem;
 }
 
-#container-info {
+.button-info {
   background-color: white;
   border-radius: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.container-info {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 80%;
+  height: 80%;
+  background-color: black;
+  color: white;
+  overflow-y: auto;
 }

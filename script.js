@@ -1,10 +1,10 @@
 const baseUrl =
   "https://api.nasa.gov/planetary/apod?api_key=v3uFn7uhfV3YcTTafG142dqcDpC1FClGV4xWMmeM";
 
-const buttonRandomImage = document.querySelector("#button-random-image");
-const dateInput = document.querySelector("#input-date");
-const containerImage = document.querySelector("#container-image");
-const containerInfo = document.querySelector("#container-info");
+const buttonRandomImage = document.querySelector(".button-random-image");
+const dateInput = document.querySelector(".input-date");
+const containerImage = document.querySelector(".container-image");
+const buttonInfo = document.querySelector(".button-info");
 
 // fetch data, customize output by modifying url parameter
 async function fetchData(url) {
@@ -44,7 +44,7 @@ async function fetchData(url) {
         // display error message for 5 sec, then get a new random image:
         let i = 5;
         let interval = setInterval(() => {
-          errorMessageVideo.textContent = `No image available on this day. Getting a random one in ${i}`;
+          errorMessageVideo.textContent = `No image available on the chosen day. Getting a random one in ${i}`;
           i--;
         }, 1000);
 
@@ -56,6 +56,45 @@ async function fetchData(url) {
           clearInterval(interval);
         }, 6000);
       }
+
+      // add info about the image when the info icon is clicked
+      buttonInfo.addEventListener("click", () => {
+        console.log(dataChecked);
+
+        const containerInfo = document.querySelector(".container-info");
+        while (containerInfo.hasChildNodes()) {
+          containerInfo.removeChild(containerInfo.firstChild);
+        }
+        containerInfo.classList.remove("hidden");
+
+        const buttonCloseInfo = document.createElement("button");
+        buttonCloseInfo.classList.add("button-close-info");
+        buttonCloseInfo.textContent = "X";
+        containerInfo.appendChild(buttonCloseInfo);
+
+        const imageTitle = document.createElement("p");
+        imageTitle.classList.add("image-title");
+        imageTitle.textContent = "Title: " + dataChecked["title"];
+        containerInfo.appendChild(imageTitle);
+
+        const imageDate = document.createElement("p");
+        imageDate.classList.add("image-date");
+        imageDate.textContent = "Date: " + dataChecked["date"];
+        containerInfo.appendChild(imageDate);
+
+        const imageCopyright = document.createElement("p");
+        imageCopyright.classList.add("image-copyright");
+        imageCopyright.textContent = "Copyright: " + dataChecked["copyright"];
+        containerInfo.appendChild(imageCopyright);
+
+        const imageExplanation = document.createElement("p");
+        imageExplanation.classList.add("image-explanation");
+        imageExplanation.textContent =
+          "Explanation: " + dataChecked["explanation"];
+        containerInfo.appendChild(imageExplanation);
+
+        console.log(containerInfo);
+      });
     }
   } catch (error) {
     console.error(error);
@@ -74,14 +113,24 @@ buttonRandomImage.addEventListener("click", () => {
 });
 
 // make sure large images scales down to fit between header and footer
-function setElementHeight() {
+function setImageHeight() {
   const headerHeight = document.querySelector("header").offsetHeight;
   const footerHeight = document.querySelector("footer").offsetHeight;
 
   containerImage.style.height = `calc(100% - ${headerHeight}px - ${footerHeight}px)`;
 }
 
-window.addEventListener("resize", setElementHeight);
+window.addEventListener("resize", setImageHeight);
 
-// Call the function initially
-setElementHeight();
+// Set image height initially:
+setImageHeight();
+// Get a random image initially:
+fetchData(baseUrl + "&count=1");
+
+// if container-info is visible, close it on click
+const containerInfo = document.querySelector(".container-info");
+containerInfo.addEventListener("click", () => {
+  if (!containerInfo.classList.contains("hidden")) {
+    containerInfo.classList.add("hidden");
+  }
+});
