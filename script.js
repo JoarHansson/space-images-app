@@ -1,3 +1,5 @@
+import "./style.css";
+
 const baseUrl =
   "https://api.nasa.gov/planetary/apod?api_key=v3uFn7uhfV3YcTTafG142dqcDpC1FClGV4xWMmeM";
 
