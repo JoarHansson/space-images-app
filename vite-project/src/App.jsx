@@ -6,8 +6,9 @@ function App() {
   const footerRef = useRef(null);
   const containerImageRef = useRef(null);
 
-  const [img, setImg] = useState(null);
+  const [fetchedData, setFetchedData] = useState(null);
   const [error, setError] = useState(null);
+  const [containerInfoVisible, setContainerInfoVisible] = useState(false);
 
   useEffect(() => {
     function setImageHeight() {
@@ -37,6 +38,9 @@ function App() {
 
   // fetch data, customize output by modifying url parameter
   async function fetchData(url) {
+    // remove the popup info container if it isn't already toggled off:
+    setContainerInfoVisible(false);
+
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -58,6 +62,8 @@ function App() {
         } else {
           dataChecked = data;
         }
+
+        setFetchedData(dataChecked);
 
         // append image, skip videos.
         if (dataChecked.media_type === "image") {
@@ -115,7 +121,7 @@ function App() {
       </header>
 
       <div ref={containerImageRef} className="container-image">
-        {img && <img src={img} />}
+        {img && <img src={fetchedData.url} alt={fetchedData.title} />}
         {error && <p className="error-message">{error}</p>}
       </div>
 
@@ -127,9 +133,32 @@ function App() {
         >
           Github
         </a>
-        <button className="button-info">Image Info</button>
+        <button
+          className="button-info"
+          onClick={() => setContainerInfoVisible(!containerInfoVisible)}
+        >
+          Image Info
+        </button>
       </footer>
-      <div className="container-info hidden"></div>
+
+      {containerInfoVisible && (
+        <div className="container-info">
+          <button
+            className="button-close-info"
+            onClick={() => setContainerInfoVisible(false)}
+          >
+            X
+          </button>
+          <p className="image-title">Title: {fetchedData.title}</p>
+          <p className="image-date">Date: {fetchedData.date}</p>
+          <p className="image-copyright">
+            Copyright: {fetchedData.copyright ?? "Not specified"}
+          </p>
+          <p className="image-explanation">
+            Explanation: {fetchedData.explanation}
+          </p>
+        </div>
+      )}
     </>
   );
 }
