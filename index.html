@@ -2,40 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Space Images</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
-      rel="stylesheet"
-    />
-    <script type="module" src="script.js" defer></script>
   </head>
   <body>
-    <header>
-      <button class="button-random-image desktop">Get random image</button>
-      <h1 class="desktop">Space Images</h1>
-      <input type="date" class="input-date desktop" />
-
-      <h1 class="mobile">Space Images</h1>
-      <div class="container-header mobile">
-        <button class="button-random-image mobile">Get random image</button>
-        <input type="date" class="input-date mobile" />
-      </div>
-    </header>
-
-    <div class="container-image"></div>
-
-    <footer>
-      <a
-        href="https://github.com/JoarHansson/space-images"
-        class="github-link"
-        target="”_blank”"
-        >Github</a
-      >
-      <button class="button-info">Image Info</button>
-    </footer>
-    <div class="container-info hidden"></div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
