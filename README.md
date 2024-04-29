@@ -1,9 +1,11 @@
 # SPACE IMAGES
-A repository for the assignment Public API Consumer at Yrgo.
 
-* [Deployed site on GitHub Pages](https://joarhansson.github.io/space-images/)
+Implementing react in an old project for learning purposes.
 
-The Astronomy Picture of the Day API by NASA was used in the assignment.
-* https://github.com/nasa/apod-api
-* https://api.nasa.gov/
-* https://apod.nasa.gov/
+- [Deployed site on Vercel](https://space-images-app.vercel.app/)
+
+Credit to The Astronomy Picture of the Day API by NASA, which is used in the app.
+
+- https://github.com/nasa/apod-api
+- https://api.nasa.gov/
+- https://apod.nasa.gov/
