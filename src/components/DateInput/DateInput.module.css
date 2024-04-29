@@ -1,15 +1,15 @@
-.button {
+.date {
   padding: 0.5rem 1rem;
   background-color: var(--text);
   color: var(--bg-color-darker);
 }
 
-.button:hover {
+.date:hover {
   background-color: var(--text-hover);
 }
 
 @media screen and (max-width: 900px) {
-  .button {
+  .date {
     padding: 0.25rem 0.5rem;
   }
 }
