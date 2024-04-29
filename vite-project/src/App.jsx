@@ -47,7 +47,7 @@ function App() {
 
       console.log("1", response.status);
 
-      setImg(null);
+      setFetchedData(null);
       setError(null);
 
       console.log("2", data);
@@ -67,7 +67,7 @@ function App() {
 
         // append image, skip videos.
         if (dataChecked.media_type === "image") {
-          setImg(dataChecked.url);
+          setFetchedData(dataChecked);
         } else if (dataChecked.media_type === "video") {
           // display error message for 5 sec, then get a new random image:
           let i = 5;
@@ -121,7 +121,7 @@ function App() {
       </header>
 
       <div ref={containerImageRef} className="container-image">
-        {img && <img src={fetchedData.url} alt={fetchedData.title} />}
+        {fetchedData && <img src={fetchedData.url} alt={fetchedData.title} />}
         {error && <p className="error-message">{error}</p>}
       </div>
 
