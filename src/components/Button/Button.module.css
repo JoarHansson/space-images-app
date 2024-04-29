@@ -1,0 +1,11 @@
+.button {
+  padding: 0.5rem 1rem;
+  background-color: var(--text);
+  color: var(--bg-color-darker);
+}
+
+@media screen and (max-width: 900px) {
+  .button {
+    padding: 0.25rem 0.5rem;
+  }
+}

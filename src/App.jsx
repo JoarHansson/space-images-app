@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./index.css";
 
+import Header from "./components/Header/Header.jsx";
+import Button from "./components/Button/Button.jsx";
+
 function App() {
   const headerRef = useRef(null);
   const footerRef = useRef(null);
@@ -94,31 +97,13 @@ function App() {
 
   return (
     <>
-      <header ref={headerRef}>
-        <button
-          className="button-random-image desktop"
-          onClick={() => fetchData(baseUrl + "&count=1")}
-        >
-          Get random image
-        </button>
-        <h1 className="desktop">Space Images</h1>
-
-        <input
-          type="date"
-          className="input-date desktop"
-          onChange={(event) =>
-            fetchData(baseUrl + "&date=" + event.target.value)
-          }
-        />
-
-        <h1 className="mobile">Space Images</h1>
-        <div className="container-header mobile">
-          <button className="button-random-image mobile">
-            Get random image
-          </button>
-          <input type="date" className="input-date mobile" />
-        </div>
-      </header>
+      <Header
+        ref={headerRef}
+        onClickRandomButton={() => fetchData(baseUrl + "&count=1")}
+        onChangeDateInput={(event) =>
+          fetchData(baseUrl + "&date=" + event.target.value)
+        }
+      />
 
       <div ref={containerImageRef} className="container-image">
         {fetchedData && <img src={fetchedData.url} alt={fetchedData.title} />}
