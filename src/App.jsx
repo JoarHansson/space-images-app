@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./index.css";
 
 import Header from "./components/Header/Header.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 
 function App() {
   const headerRef = useRef(null);
@@ -110,21 +111,10 @@ function App() {
         {error && <p className="error-message">{error}</p>}
       </div>
 
-      <footer ref={footerRef}>
-        <a
-          href="https://github.com/JoarHansson/space-images-app"
-          className="github-link"
-          target="”_blank”"
-        >
-          Github
-        </a>
-        <button
-          className="button-info"
-          onClick={() => setContainerInfoVisible(!containerInfoVisible)}
-        >
-          Image Info
-        </button>
-      </footer>
+      <Footer
+        ref={footerRef}
+        onClickImageInfo={() => setContainerInfoVisible(!containerInfoVisible)}
+      />
 
       {containerInfoVisible && (
         <div className="container-info">

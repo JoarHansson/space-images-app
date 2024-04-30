@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../Button/Button";
-import styles from "./Header.module.css";
 import DateInput from "../DateInput/DateInput";
+import styles from "./Header.module.css";
 
 const Header = React.forwardRef((props, ref) => (
   <header ref={ref} className={styles.header}>
