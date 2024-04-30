@@ -3,6 +3,7 @@ import "./index.css";
 
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
+import InfoPopup from "./components/InfoPopup/InfoPopup.jsx";
 
 function App() {
   const headerRef = useRef(null);
@@ -117,22 +118,10 @@ function App() {
       />
 
       {containerInfoVisible && (
-        <div className="container-info">
-          <button
-            className="button-close-info"
-            onClick={() => setContainerInfoVisible(false)}
-          >
-            X
-          </button>
-          <p className="image-title">Title: {fetchedData.title}</p>
-          <p className="image-date">Date: {fetchedData.date}</p>
-          <p className="image-copyright">
-            Copyright: {fetchedData.copyright ?? "Not specified"}
-          </p>
-          <p className="image-explanation">
-            Explanation: {fetchedData.explanation}
-          </p>
-        </div>
+        <InfoPopup
+          fetchedData={fetchedData}
+          onClickCloseButton={() => setContainerInfoVisible(false)}
+        />
       )}
     </>
   );
