@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import "./index.css";
 
 import Header from "./components/Header/Header.jsx";
-import Button from "./components/Button/Button.jsx";
 
 function App() {
   const headerRef = useRef(null);
@@ -36,8 +35,9 @@ function App() {
     };
   }, []);
 
-  const baseUrl =
-    "https://api.nasa.gov/planetary/apod?api_key=v3uFn7uhfV3YcTTafG142dqcDpC1FClGV4xWMmeM";
+  const baseUrl = `https://api.nasa.gov/planetary/apod?api_key=${
+    import.meta.env.VITE_API_KEY
+  }`;
 
   // fetch data, customize output by modifying url parameter
   async function fetchData(url) {
@@ -112,7 +112,7 @@ function App() {
 
       <footer ref={footerRef}>
         <a
-          href="https://github.com/JoarHansson/space-images"
+          href="https://github.com/JoarHansson/space-images-app"
           className="github-link"
           target="”_blank”"
         >
