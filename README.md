@@ -1,6 +1,6 @@
 # SPACE IMAGES
 
-Implementing react in an old project for learning purposes.
+Implementing various things in an old project for learning purposes.
 
 - [Deployed site on Vercel](https://space-images-app.vercel.app/)
 
