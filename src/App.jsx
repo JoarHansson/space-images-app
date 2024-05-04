@@ -3,6 +3,7 @@ import "./index.css";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import InfoPopup from "./components/InfoPopup/InfoPopup.jsx";
+import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation.jsx";
 
 function App() {
   const headerRef = useRef(null);
@@ -59,7 +60,7 @@ function App() {
       console.log("2", data);
 
       if (response.status != 200) {
-        setError(data.error.message); // the error message provided in the object)
+        setError(data.msg); // the error message provided in the object)
       } else {
         // data comes as an object or as an array (each index containing an object)
         let dataChecked;
@@ -95,11 +96,7 @@ function App() {
       />
 
       <div ref={containerImageRef} className="container-image">
-        {imgLoaded ? (
-          ""
-        ) : (
-          <div style={{ color: "white" }}>loader animation placeholder </div>
-        )}
+        {imgLoaded || error ? "" : <LoadingAnimation />}
         {fetchedData && (
           <img
             style={imgLoaded ? {} : { display: "none" }}
@@ -108,7 +105,6 @@ function App() {
             onLoad={() => setImgLoaded(true)}
           />
         )}
-
         {error && <p className="error-message">{error}</p>}
       </div>
 
