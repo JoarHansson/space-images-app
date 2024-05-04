@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./index.css";
-
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import InfoPopup from "./components/InfoPopup/InfoPopup.jsx";
@@ -13,6 +12,7 @@ function App() {
   const [fetchedData, setFetchedData] = useState(null);
   const [error, setError] = useState(null);
   const [containerInfoVisible, setContainerInfoVisible] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   useEffect(() => {
     function setImageHeight() {
@@ -46,19 +46,20 @@ function App() {
     // remove the popup info container if it isn't already toggled off:
     setContainerInfoVisible(false);
 
+    setImgLoaded(false);
+    setError(null);
+    setFetchedData(null);
+
     try {
       const response = await fetch(url);
       const data = await response.json();
 
       console.log("1", response.status);
 
-      setFetchedData(null);
-      setError(null);
-
       console.log("2", data);
 
       if (response.status != 200) {
-        setError(data.msg); // the error message provided in the object)
+        setError(data.error.message); // the error message provided in the object)
       } else {
         // data comes as an object or as an array (each index containing an object)
         let dataChecked;
@@ -74,21 +75,7 @@ function App() {
         if (dataChecked.media_type === "image") {
           setFetchedData(dataChecked);
         } else if (dataChecked.media_type === "video") {
-          // display error message for 5 sec, then get a new random image:
-          let i = 5;
-          let interval = setInterval(() => {
-            let errorMessageVideo = `No image available on the chosen day. Getting a random one in ${i}`;
-
-            setError(errorMessageVideo);
-
-            i--;
-          }, 1000);
-
-          setTimeout(() => {
-            // get a random image
-            fetchData(baseUrl + "&count=1");
-            clearInterval(interval);
-          }, 6000);
+          setError("No image available on the chosen day.");
         }
       }
     } catch (error) {
@@ -108,7 +95,20 @@ function App() {
       />
 
       <div ref={containerImageRef} className="container-image">
-        {fetchedData && <img src={fetchedData.url} alt={fetchedData.title} />}
+        {imgLoaded ? (
+          ""
+        ) : (
+          <div style={{ color: "white" }}>loader animation placeholder </div>
+        )}
+        {fetchedData && (
+          <img
+            style={imgLoaded ? {} : { display: "none" }}
+            src={fetchedData.url}
+            alt={fetchedData.title}
+            onLoad={() => setImgLoaded(true)}
+          />
+        )}
+
         {error && <p className="error-message">{error}</p>}
       </div>
 
