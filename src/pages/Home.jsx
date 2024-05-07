@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./index.css";
-import Header from "./components/Header/Header.jsx";
-import Footer from "./components/Footer/Footer.jsx";
-import InfoPopup from "./components/InfoPopup/InfoPopup.jsx";
-import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation.jsx";
+import "../index.css";
+import styles from "./Home.module.css";
+import Header from "../components/Header/Header.jsx";
+import Footer from "../components/Footer/Footer.jsx";
+import InfoPopup from "../components/InfoPopup/InfoPopup.jsx";
+import LoadingAnimation from "../components/LoadingAnimation/LoadingAnimation.jsx";
 
-function App() {
+function Home() {
   const headerRef = useRef(null);
   const footerRef = useRef(null);
   const containerImageRef = useRef(null);
@@ -86,7 +87,7 @@ function App() {
   }
 
   return (
-    <>
+    <main className={styles.home}>
       <Header
         ref={headerRef}
         onClickRandomButton={() => fetchData(baseUrl + "&count=1")}
@@ -96,7 +97,7 @@ function App() {
         imageDate={fetchedData ? fetchedData.date : null}
       />
 
-      <div ref={containerImageRef} className="container-image">
+      <div ref={containerImageRef} className={styles.containerImage}>
         {imgLoaded || error ? "" : <LoadingAnimation />}
         {fetchedData && (
           <img
@@ -106,7 +107,7 @@ function App() {
             onLoad={() => setImgLoaded(true)}
           />
         )}
-        {error && <p className="error-message">{error}</p>}
+        {error && <p className={styles.errorMessage}>{error}</p>}
       </div>
 
       <Footer
@@ -120,8 +121,8 @@ function App() {
           onClickCloseButton={() => setContainerInfoVisible(false)}
         />
       )}
-    </>
+    </main>
   );
 }
 
-export default App;
+export default Home;

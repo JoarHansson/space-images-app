@@ -1,0 +1,43 @@
+main.index {
+  height: 100vh;
+  margin: 0;
+
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.h1 {
+  text-align: center;
+  margin: 0;
+  font-weight: 800;
+  font-size: 4rem;
+
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--gradient0),
+    var(--gradient1),
+    var(--gradient2),
+    var(--gradient1),
+    var(--gradient0)
+  );
+  background-size: 800% auto;
+  animation: gradient 120s linear infinite;
+  background-clip: text;
+}
+
+@keyframes gradient {
+  to {
+    background-position: 800% center;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .h1 {
+    font-size: 2rem;
+  }
+}

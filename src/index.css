@@ -43,39 +43,3 @@ body,
   height: 100vh;
   margin: 0;
 }
-
-#root {
-  background-color: var(--bg-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* main content, image: */
-.container-image {
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.container-image img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-/* Error message: */
-.error-message {
-  font-size: 1.5rem;
-  text-align: center;
-  padding: 0 2rem;
-}
-
-@media screen and (max-width: 900px) {
-  /* error message: */
-  .error-message {
-    font-size: 1rem;
-  }
-}
