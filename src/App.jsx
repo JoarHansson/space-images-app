@@ -93,6 +93,7 @@ function App() {
         onChangeDateInput={(event) =>
           fetchData(baseUrl + "&date=" + event.target.value)
         }
+        imageDate={fetchedData ? fetchedData.date : null}
       />
 
       <div ref={containerImageRef} className="container-image">

@@ -8,7 +8,10 @@ const Header = React.forwardRef((props, ref) => (
     <h1 className={styles.h1}>Space Images</h1>
     <div className={styles.container}>
       <Button onClick={props.onClickRandomButton}>Get random image</Button>
-      <DateInput onChange={props.onChangeDateInput} />
+      <DateInput
+        onChange={props.onChangeDateInput}
+        imageDate={props.imageDate}
+      />
     </div>
   </header>
 ));
