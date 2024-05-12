@@ -1,6 +1,10 @@
-import styles from "./Index.module.css";
+// packages:
 import { Link } from "react-router-dom";
+// components:
 import Button from "../components/Button/Button";
+import TransitionAnimation from "../components/TransitionAnimation/TransitionAnimation";
+// css:
+import styles from "./Index.module.css";
 
 const Index = () => {
   return (
@@ -10,6 +14,8 @@ const Index = () => {
       <Link to={"home"}>
         <Button>Lets go</Button>
       </Link>
+
+      <TransitionAnimation />
     </main>
   );
 };

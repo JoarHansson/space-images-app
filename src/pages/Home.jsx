@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../index.css";
-import styles from "./Home.module.css";
+// components:
 import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 import InfoPopup from "../components/InfoPopup/InfoPopup.jsx";
 import LoadingAnimation from "../components/LoadingAnimation/LoadingAnimation.jsx";
+import TransitionAnimation from "../components/TransitionAnimation/TransitionAnimation";
+// css:
+import "../index.css";
+import styles from "./Home.module.css";
 
 function Home() {
   const headerRef = useRef(null);
@@ -121,6 +124,8 @@ function Home() {
           onClickCloseButton={() => setContainerInfoVisible(false)}
         />
       )}
+
+      <TransitionAnimation />
     </main>
   );
 }
