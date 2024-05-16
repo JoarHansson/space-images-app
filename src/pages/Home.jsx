@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+// packages:
+import { Heart } from "lucide-react";
 // components:
 import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 import InfoPopup from "../components/InfoPopup/InfoPopup.jsx";
 import LoadingAnimation from "../components/LoadingAnimation/LoadingAnimation.jsx";
-import TransitionAnimation from "../components/TransitionAnimation/TransitionAnimation";
+import TransitionAnimation from "../components/TransitionAnimation/TransitionAnimation.jsx";
 // css:
 import "../index.css";
 import styles from "./Home.module.css";
@@ -18,8 +20,57 @@ function Home() {
   const [error, setError] = useState(null);
   const [containerInfoVisible, setContainerInfoVisible] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgLiked, setImgLiked] = useState(false);
+
+  // Todo:
+  // Break out functions etc into components/files of their own.
+
+  const getFavoritesFromLocalStorage = () => {
+    let favorites = [];
+    try {
+      favorites = JSON.parse(localStorage.getItem("favorites"));
+    } catch (error) {
+      console.error(
+        "Invalid JSON in localStorage for 'favorites'. Resetting to empty array."
+      );
+      favorites = [];
+    }
+    return favorites;
+  };
+
+  const addToFavorites = () => {
+    setImgLiked(true);
+
+    let favorites = getFavoritesFromLocalStorage();
+
+    if (Array.isArray(favorites)) {
+      localStorage.setItem(
+        "favorites",
+        JSON.stringify([...favorites, fetchedData])
+      );
+    } else {
+      localStorage.setItem("favorites", JSON.stringify([fetchedData]));
+    }
+  };
+
+  const removeFromFavorites = () => {
+    setImgLiked(false);
+
+    let favorites = getFavoritesFromLocalStorage();
+
+    // remove if the selected one matches one (or many) in local storage
+    favorites = favorites.filter((favorite) => {
+      return JSON.stringify(favorite) !== JSON.stringify(fetchedData);
+    });
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
 
   useEffect(() => {
+    // todo:
+    // change this logic (when an image that is already liked turns up):
+    setImgLiked(false);
+
     function setImageHeight() {
       const headerHeight = headerRef.current.offsetHeight;
       const footerHeight = footerRef.current.offsetHeight;
@@ -54,6 +105,10 @@ function Home() {
     setImgLoaded(false);
     setError(null);
     setFetchedData(null);
+
+    // todo:
+    // change this logic (when an image that is already liked turns up):
+    setImgLiked(false);
 
     try {
       const response = await fetch(url);
@@ -100,15 +155,32 @@ function Home() {
         imageDate={fetchedData ? fetchedData.date : null}
       />
 
-      <div ref={containerImageRef} className={styles.containerImage}>
+      {/* this part could be rewritten to cleaner code: */}
+      {/* and maybe broken out to a component of its own */}
+      <div ref={containerImageRef} className={styles.outerImageContainer}>
         {imgLoaded || error ? "" : <LoadingAnimation />}
         {fetchedData && (
-          <img
+          <div
+            className={styles.innerImageContainer}
             style={imgLoaded ? {} : { display: "none" }}
-            src={fetchedData.url}
-            alt={fetchedData.title}
-            onLoad={() => setImgLoaded(true)}
-          />
+          >
+            <img
+              className={styles.image}
+              src={fetchedData.url}
+              alt={fetchedData.title}
+              onLoad={() => setImgLoaded(true)}
+            />
+            <div className={styles.imgFooter}>
+              <button
+                className={styles.likeButton}
+                onClick={imgLiked ? removeFromFavorites : addToFavorites}
+              >
+                <Heart
+                  className={imgLiked ? styles.heartRed : styles.heartGrey}
+                />
+              </button>
+            </div>
+          </div>
         )}
         {error && <p className={styles.errorMessage}>{error}</p>}
       </div>
