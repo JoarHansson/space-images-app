@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-// packages:
-import { Heart } from "lucide-react";
 // components:
-import Header from "../components/Header/Header.jsx";
-import Footer from "../components/Footer/Footer.jsx";
-import InfoPopup from "../components/InfoPopup/InfoPopup.jsx";
-import LoadingAnimation from "../components/LoadingAnimation/LoadingAnimation.jsx";
-import TransitionAnimation from "../components/TransitionAnimation/TransitionAnimation.jsx";
+import Header from "../../components/Header/Header.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
+import InfoPopup from "../../components/InfoPopup/InfoPopup.jsx";
+import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation.jsx";
+import TransitionAnimation from "../../components/TransitionAnimation/TransitionAnimation.jsx";
+import ImageCard from "../../components/ImageCard/ImageCard.jsx";
 // css:
-import "../index.css";
 import styles from "./Home.module.css";
 
 function Home() {
@@ -85,7 +83,7 @@ function Home() {
     // Set image height initially:
     setImageHeight();
     // Get a random image initially:
-    fetchData(baseUrl + "&count=1");
+    fetchData(baseUrl + "?count=1");
 
     // Clean up function
     return () => {
@@ -93,9 +91,9 @@ function Home() {
     };
   }, []);
 
-  const baseUrl = `https://api.nasa.gov/planetary/apod?api_key=${
-    import.meta.env.VITE_API_KEY
-  }`;
+  // todo: resolve this:
+  // api source changed to the one below (due to original stopped working)... not sure error handling works anymore.
+  const baseUrl = "https://apod.ellanan.com/api";
 
   // fetch data, customize output by modifying url parameter
   async function fetchData(url) {
@@ -140,7 +138,6 @@ function Home() {
       }
     } catch (error) {
       console.error(error);
-      console.log(error);
     }
   }
 
@@ -148,40 +145,25 @@ function Home() {
     <main className={styles.home}>
       <Header
         ref={headerRef}
-        onClickRandomButton={() => fetchData(baseUrl + "&count=1")}
+        onClickRandomButton={() => fetchData(baseUrl + "?count=1")}
         onChangeDateInput={(event) =>
-          fetchData(baseUrl + "&date=" + event.target.value)
+          fetchData(baseUrl + "?date=" + event.target.value)
         }
         imageDate={fetchedData ? fetchedData.date : null}
       />
 
-      {/* this part could be rewritten to cleaner code: */}
-      {/* and maybe broken out to a component of its own */}
       <div ref={containerImageRef} className={styles.outerImageContainer}>
         {imgLoaded || error ? "" : <LoadingAnimation />}
+
         {fetchedData && (
-          <div
-            className={styles.innerImageContainer}
-            style={imgLoaded ? {} : { display: "none" }}
-          >
-            <img
-              className={styles.image}
-              src={fetchedData.url}
-              alt={fetchedData.title}
-              onLoad={() => setImgLoaded(true)}
-            />
-            <div className={styles.imgFooter}>
-              <button
-                className={styles.likeButton}
-                onClick={imgLiked ? removeFromFavorites : addToFavorites}
-              >
-                <Heart
-                  className={imgLiked ? styles.heartRed : styles.heartGrey}
-                />
-              </button>
-            </div>
-          </div>
+          <ImageCard
+            imageData={fetchedData}
+            imgLoaded={imgLoaded}
+            imgLiked={imgLiked}
+            onImgLoad={() => setImgLoaded(true)}
+          />
         )}
+
         {error && <p className={styles.errorMessage}>{error}</p>}
       </div>
 

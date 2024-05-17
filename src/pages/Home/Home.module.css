@@ -1,0 +1,32 @@
+main.home {
+  height: 100vh;
+  margin: 0;
+
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* main content, image: */
+.outerImageContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Error message: */
+.errorMessage {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+@media screen and (max-width: 900px) {
+  .errorMessage {
+    font-size: 1rem;
+  }
+}

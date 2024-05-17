@@ -1,0 +1,27 @@
+main.likes {
+  margin: 0;
+
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+  min-height: 100vh;
+}
+
+.container {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 2rem;
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    margin: 0 1rem;
+  }
+}
