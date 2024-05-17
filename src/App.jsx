@@ -3,8 +3,12 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import { useLocation, useRoutes, Routes, Route } from "react-router-dom";
 // pages:
-import Index from "./pages/Index";
-import Home from "./pages/Home";
+import Index from "./pages/Index/Index";
+import Home from "./pages/Home/Home";
+import Likes from "./pages/Likes/Likes";
+import NotFound from "./pages/NotFound/NotFound";
+// css:
+import "./index.css";
 
 export default function App() {
   const location = useLocation();
@@ -15,12 +19,10 @@ export default function App() {
         {/* Routes */}
         <Route index element={<Index />} />
         <Route path="home" element={<Home />} />
+        <Route path="likes" element={<Likes />} />
 
         {/* 404 page */}
-        <Route
-          path="*"
-          element={<div style={{ margin: "2rem" }}>404 - not found</div>}
-        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );
