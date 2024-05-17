@@ -1,0 +1,21 @@
+.likeButton {
+  background: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heartRed {
+  height: 2rem;
+  width: 2rem;
+  fill: var(--text);
+  stroke: none;
+}
+
+.heartGrey {
+  height: 2rem;
+  width: 2rem;
+  fill: var(--inactive-grey);
+  stroke: none;
+}
