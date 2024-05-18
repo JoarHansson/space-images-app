@@ -1,5 +1,3 @@
-// packages:
-import { Link } from "react-router-dom";
 // components:
 import Button from "../../components/Button/Button";
 import TransitionAnimation from "../../components/TransitionAnimation/TransitionAnimation";
