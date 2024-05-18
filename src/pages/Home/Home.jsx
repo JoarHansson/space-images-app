@@ -18,7 +18,6 @@ function Home() {
 
   const [fetchedData, setFetchedData] = useState(null);
   const [error, setError] = useState(null);
-  const [containerInfoVisible, setContainerInfoVisible] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgLiked, setImgLiked] = useState(false);
 
@@ -55,9 +54,6 @@ function Home() {
 
   // fetch data, customize output by modifying url parameter
   async function fetchData(url) {
-    // remove the popup info container if it isn't already toggled off:
-    setContainerInfoVisible(false);
-
     setImgLoaded(false);
     setError(null);
     setFetchedData(null);
@@ -136,17 +132,7 @@ function Home() {
         {error && <p className={styles.errorMessage}>{error}</p>}
       </div>
 
-      <Footer
-        ref={footerRef}
-        onClickImageInfo={() => setContainerInfoVisible(!containerInfoVisible)}
-      />
-
-      {containerInfoVisible && (
-        <InfoPopup
-          fetchedData={fetchedData}
-          onClickCloseButton={() => setContainerInfoVisible(false)}
-        />
-      )}
+      <Footer ref={footerRef} onClickImageInfo={console.log("hej")} />
 
       <TransitionAnimation />
     </main>
