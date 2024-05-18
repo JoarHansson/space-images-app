@@ -41,3 +41,9 @@ main.index {
     font-size: 2rem;
   }
 }
+
+.flexContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

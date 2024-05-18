@@ -11,13 +11,15 @@ const Index = () => {
     <main className={styles.index}>
       <h1 className={styles.h1}>Space Images</h1>
 
-      <Link to={"home"}>
-        <Button>Lets go</Button>
-      </Link>
+      <div className={styles.flexContainer}>
+        <Button isLink={true} linkTo={"home"}>
+          Explore images
+        </Button>
 
-      <Link to={"likes"}>
-        <Button>Likes</Button>
-      </Link>
+        <Button isLink={true} linkTo={"likes"}>
+          Liked images
+        </Button>
+      </div>
 
       <TransitionAnimation />
     </main>
