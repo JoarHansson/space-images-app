@@ -3,7 +3,7 @@ import HeartButton from "../../components/HeartButton/HeartButton";
 // css:
 import styles from "./ImageCard.module.css";
 
-const ImageCard = ({ imageData, imgLiked, imgLoaded, onImgLoad }) => {
+const ImageCard = ({ imageData, imgLiked, imgLoaded, onImgLoad, onClick }) => {
   return (
     <div
       className={styles.container}
@@ -17,16 +17,9 @@ const ImageCard = ({ imageData, imgLiked, imgLoaded, onImgLoad }) => {
         onLoad={onImgLoad}
       />
       <div className={styles.imageFooter}>
-        <HeartButton
-          onClick={
-            // todo:
-            // replace placeholders, implement functions below
-            imgLiked
-              ? console.log("removeFromFavorites")
-              : console.log("addToFavorites")
-          }
-          imgLiked={imgLiked}
-        />
+        <HeartButton onClick={onClick} imgLiked={imgLiked} />
+        {/* todo: */}
+        {/* make this button work: */}
         <button className={styles.infoButton}>Image Info</button>
       </div>
     </div>

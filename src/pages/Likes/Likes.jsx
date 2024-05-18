@@ -1,47 +1,43 @@
-// packages:
-import { Link } from "react-router-dom";
+import { useState } from "react";
 // components:
-import HeartButton from "../../components/HeartButton/HeartButton";
 import TransitionAnimation from "../../components/TransitionAnimation/TransitionAnimation";
 import ImageCard from "../../components/ImageCard/ImageCard";
 import Header from "../../components/Header/Header";
+// services:
+import {
+  getFavoritesFromLocalStorage,
+  checkIfInLocalStorage,
+  removeFromFavorites,
+} from "../../services/utils";
 // css:
 import styles from "./Likes.module.css";
 
 const Likes = () => {
-  const imgLiked = true;
+  const [favorites, setFavorites] = useState(getFavoritesFromLocalStorage());
 
-  // todo:
-  // break out this these functions for more DRY code (copied from Home.jsx)
-  const getFavoritesFromLocalStorage = () => {
-    let favorites = [];
-    try {
-      favorites = JSON.parse(localStorage.getItem("favorites"));
-    } catch (error) {
-      console.error(
-        "Invalid JSON in localStorage for 'favorites'. Resetting to empty array."
-      );
-      favorites = [];
-    }
-    return favorites;
+  const handleRemove = (favorite) => {
+    removeFromFavorites(favorite);
+    setFavorites(getFavoritesFromLocalStorage());
   };
-
-  let favorites = getFavoritesFromLocalStorage();
-  console.log(favorites);
 
   return (
     <main className={styles.likes}>
-      <Link to={"/"}>home</Link>
+      <Header />
 
       <div className={styles.container}>
         {favorites.map((favorite) => {
           return (
-            <ImageCard
-              imageData={favorite}
-              key={favorite.url}
-              imgLiked={true}
-              imgLoaded={true}
-            />
+            <div key={favorite.url}>
+              <ImageCard
+                imageData={favorite}
+                imgLiked={true}
+                imgLoaded={true}
+                onClick={() => handleRemove(favorite)}
+              />
+              <button onClick={() => checkIfInLocalStorage(favorite)}>
+                test
+              </button>
+            </div>
           );
         })}
       </div>

@@ -6,6 +6,8 @@ import InfoPopup from "../../components/InfoPopup/InfoPopup.jsx";
 import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation.jsx";
 import TransitionAnimation from "../../components/TransitionAnimation/TransitionAnimation.jsx";
 import ImageCard from "../../components/ImageCard/ImageCard.jsx";
+// services:
+import { addToFavorites, removeFromFavorites } from "../../services/utils";
 // css:
 import styles from "./Home.module.css";
 
@@ -19,50 +21,6 @@ function Home() {
   const [containerInfoVisible, setContainerInfoVisible] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgLiked, setImgLiked] = useState(false);
-
-  // Todo:
-  // Break out functions etc into components/files of their own.
-
-  const getFavoritesFromLocalStorage = () => {
-    let favorites = [];
-    try {
-      favorites = JSON.parse(localStorage.getItem("favorites"));
-    } catch (error) {
-      console.error(
-        "Invalid JSON in localStorage for 'favorites'. Resetting to empty array."
-      );
-      favorites = [];
-    }
-    return favorites;
-  };
-
-  const addToFavorites = () => {
-    setImgLiked(true);
-
-    let favorites = getFavoritesFromLocalStorage();
-
-    if (Array.isArray(favorites)) {
-      localStorage.setItem(
-        "favorites",
-        JSON.stringify([...favorites, fetchedData])
-      );
-    } else {
-      localStorage.setItem("favorites", JSON.stringify([fetchedData]));
-    }
-  };
-
-  const removeFromFavorites = () => {
-    setImgLiked(false);
-
-    let favorites = getFavoritesFromLocalStorage();
-
-    // remove if the selected one matches one (or many) in local storage
-    favorites = favorites.filter((favorite) => {
-      return JSON.stringify(favorite) !== JSON.stringify(fetchedData);
-    });
-
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  };
 
   useEffect(() => {
     // todo:
@@ -161,6 +119,17 @@ function Home() {
             imgLoaded={imgLoaded}
             imgLiked={imgLiked}
             onImgLoad={() => setImgLoaded(true)}
+            onClick={
+              imgLiked
+                ? () => {
+                    removeFromFavorites(fetchedData);
+                    setImgLiked(false);
+                  }
+                : () => {
+                    addToFavorites(fetchedData);
+                    setImgLiked(true);
+                  }
+            }
           />
         )}
 
