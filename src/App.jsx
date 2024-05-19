@@ -1,15 +1,14 @@
 import React from "react";
 // packages:
 import { AnimatePresence } from "framer-motion";
-import { useLocation, Routes, Route } from "react-router-dom";
+import { useLocation, useRoutes, Routes, Route } from "react-router-dom";
 // pages:
 import Index from "./pages/Index/Index";
 import Home from "./pages/Home/Home";
 import Likes from "./pages/Likes/Likes";
 import NotFound from "./pages/NotFound/NotFound";
-// css/font:
+// css:
 import "./index.css";
-import "@fontsource-variable/karla";
 
 export default function App() {
   const location = useLocation();
