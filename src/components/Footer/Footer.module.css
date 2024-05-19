@@ -8,20 +8,26 @@
   padding: 1rem 2rem;
 }
 
-.githubLink,
-.infoButton {
+.githubLink {
   background: none;
   color: var(--text);
 }
 
-.infoButton {
+.container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 1rem;
 }
 
 @media screen and (max-width: 550px) {
   .footer {
     padding: 1rem 1rem;
+    gap: 1rem;
+  }
+
+  .container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
   }
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 // components:
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
-import InfoPopup from "../../components/InfoPopup/InfoPopup.jsx";
 import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation.jsx";
 import TransitionAnimation from "../../components/TransitionAnimation/TransitionAnimation.jsx";
 import ImageCard from "../../components/ImageCard/ImageCard.jsx";
@@ -50,6 +49,12 @@ function Home() {
 
   // todo: resolve this:
   // api source changed to the one below (due to original stopped working)... not sure error handling works anymore.
+
+  // bring out the api functions to api.js
+
+  // maybe bring back original api source as it seems to be working again, and use this one as a backup.
+  // (use api2 if api1 doesn't respond in X seconds)
+
   const baseUrl = "https://apod.ellanan.com/api";
 
   // fetch data, customize output by modifying url parameter
@@ -97,14 +102,7 @@ function Home() {
 
   return (
     <main className={styles.home}>
-      <Header
-        ref={headerRef}
-        onClickRandomButton={() => fetchData(baseUrl + "?count=1")}
-        onChangeDateInput={(event) =>
-          fetchData(baseUrl + "?date=" + event.target.value)
-        }
-        imageDate={fetchedData ? fetchedData.date : null}
-      />
+      <Header ref={headerRef} />
 
       <div ref={containerImageRef} className={styles.outerImageContainer}>
         {imgLoaded || error ? "" : <LoadingAnimation />}
@@ -132,7 +130,14 @@ function Home() {
         {error && <p className={styles.errorMessage}>{error}</p>}
       </div>
 
-      <Footer ref={footerRef} onClickImageInfo={console.log("hej")} />
+      <Footer
+        ref={footerRef}
+        onClickRandomButton={() => fetchData(baseUrl + "?count=1")}
+        onChangeDateInput={(event) =>
+          fetchData(baseUrl + "?date=" + event.target.value)
+        }
+        imageDate={fetchedData ? fetchedData.date : null}
+      />
 
       <TransitionAnimation />
     </main>
