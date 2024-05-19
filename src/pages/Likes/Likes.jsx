@@ -6,7 +6,6 @@ import Header from "../../components/Header/Header";
 // services:
 import {
   getFavoritesFromLocalStorage,
-  checkIfInLocalStorage,
   removeFromFavorites,
 } from "../../services/utils";
 // css:
@@ -25,21 +24,22 @@ const Likes = () => {
       <Header />
 
       <div className={styles.container}>
-        {favorites.map((favorite) => {
-          return (
-            <div key={favorite.url}>
-              <ImageCard
-                imageData={favorite}
-                imgLiked={true}
-                imgLoaded={true}
-                onClick={() => handleRemove(favorite)}
-              />
-              <button onClick={() => checkIfInLocalStorage(favorite)}>
-                test
-              </button>
-            </div>
-          );
-        })}
+        {favorites ? (
+          favorites.map((favorite) => {
+            return (
+              <div key={favorite.url}>
+                <ImageCard
+                  imageData={favorite}
+                  imgLiked={true}
+                  imgLoaded={true}
+                  onClick={() => handleRemove(favorite)}
+                />
+              </div>
+            );
+          })
+        ) : (
+          <p className={styles.noLikes}>You haven't liked any images yet...</p>
+        )}
       </div>
 
       <TransitionAnimation />

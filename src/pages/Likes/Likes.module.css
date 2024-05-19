@@ -25,3 +25,15 @@ main.likes {
     margin: 0 1rem;
   }
 }
+
+.noLikes {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 8rem;
+}
+
+@media screen and (max-width: 900px) {
+  .noLikes {
+    font-size: 1rem;
+  }
+}
