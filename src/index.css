@@ -46,3 +46,22 @@ body,
   height: 100vh;
   margin: 0;
 }
+
+/* scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text) var(--bg-color);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text);
+}
+
+::-webkit-scrollbar-button {
+  display: hidden;
+}
