@@ -11,8 +11,6 @@ main.home {
 
 /* main content, image: */
 .outerImageContainer {
-  width: 100%;
-  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
