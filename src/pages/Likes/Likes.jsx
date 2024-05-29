@@ -1,7 +1,7 @@
 import { useState } from "react";
 // components:
 import TransitionAnimation from "../../components/TransitionAnimation/TransitionAnimation";
-import ImageCard from "../../components/ImageCard/ImageCard";
+import ImageCardWithFrame from "../../components/ImageCardWithFrame/ImageCardWithFrame";
 import Header from "../../components/Header/Header";
 // services:
 import {
@@ -28,7 +28,7 @@ const Likes = () => {
           favorites.map((favorite) => {
             return (
               <div key={favorite.url}>
-                <ImageCard
+                <ImageCardWithFrame
                   imageData={favorite}
                   imgLiked={true}
                   imgLoaded={true}
