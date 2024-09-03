@@ -2,7 +2,7 @@
 
 ### A place to discover space images
 
-A small vanilla HTML, CSS, JavaScript was rewritten in React for learning purposes. Some other stuff has been added along the way:
+A small vanilla HTML, CSS and JavaScript site was rewritten in React for learning purposes. Some other stuff has been added along the way:
 
 - Some smooth animations (loading spinner, page transitions, the logo) using Framer Motion and vanilla CSS
 - Routing with React Router
