@@ -1,14 +1,15 @@
 # SPACE IMAGES
 
-### Implementing features in an old school project, for learning purposes.
+### A place to discover space images
 
-Some of the features are:
-- The project was rewritten in React (originally vanilla HTML, CSS, JavaScript).
+A small vanilla HTML, CSS, JavaScript was rewritten in React for learning purposes. Some other stuff has been added along the way:
+
 - Some smooth animations (loading spinner, page transitions, the logo) using Framer Motion and vanilla CSS
 - Routing with React Router
-- Like functionality (using local storage, which I might change to a DB at a later stage)
+- Like functionality (using local storage)
 
 Links:
+
 - [Deployed site on Vercel](https://space-images-app.vercel.app/)
 - [The original repo](https://github.com/JoarHansson/space-images)
 
