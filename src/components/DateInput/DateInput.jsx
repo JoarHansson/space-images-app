@@ -6,7 +6,7 @@ const DateInput = ({ onChange, imageDate }) => {
       type="date"
       className={styles.date}
       onChange={onChange}
-      defaultValue={imageDate}
+      value={imageDate ?? ""}
     />
   );
 };
