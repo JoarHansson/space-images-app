@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 // components:
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
@@ -7,6 +7,7 @@ import TransitionAnimation from "../../components/TransitionAnimation/Transition
 import ImageCard from "../../components/ImageCard/ImageCard.jsx";
 // services:
 import { addToFavorites, removeFromFavorites } from "../../services/utils";
+import { fetchRandomImage, fetchImageByDate } from "../../services/api";
 // css:
 import styles from "./Home.module.css";
 
@@ -19,10 +20,24 @@ function Home() {
   const [error, setError] = useState(null);
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgLiked, setImgLiked] = useState(false);
+  const [inputDate, setInputDate] = useState(""); // New state to control the input date
+
+  // Fetch random image
+  const loadRandomImage = useCallback(async () => {
+    setImgLoaded(false);
+    setError(null);
+    setFetchedData(null);
+    setImgLiked(false);
+
+    try {
+      const data = await fetchRandomImage();
+      handleApiResponse(data);
+    } catch (error) {
+      setError("Failed to load random image");
+    }
+  }, []);
 
   useEffect(() => {
-    // todo:
-    // change this logic (when an image that is already liked turns up):
     setImgLiked(false);
 
     function setImageHeight() {
@@ -36,69 +51,59 @@ function Home() {
 
     window.addEventListener("resize", setImageHeight);
 
-    // Set image height initially:
     setImageHeight();
-    // Get a random image initially:
-    fetchData(baseUrl + "?count=1");
+    loadRandomImage();
 
-    // Clean up function
     return () => {
       window.removeEventListener("resize", setImageHeight);
     };
+  }, [loadRandomImage]);
+
+  const handleApiResponse = (data) => {
+    let dataChecked;
+    if (Array.isArray(data)) {
+      dataChecked = data[0];
+    } else {
+      dataChecked = data;
+    }
+
+    if (dataChecked.media_type === "image") {
+      setFetchedData(dataChecked);
+      setInputDate(dataChecked.date);
+    } else if (dataChecked.media_type === "video") {
+      setError("No image available on the chosen day.");
+    }
+  };
+
+  const debouncedFetchByDate = useCallback(() => {
+    let debounceTimeout;
+    return (date) => {
+      if (debounceTimeout) {
+        clearTimeout(debounceTimeout);
+      }
+      debounceTimeout = setTimeout(async () => {
+        setImgLoaded(false);
+        setError(null);
+        setFetchedData(null);
+        setImgLiked(false);
+
+        try {
+          const data = await fetchImageByDate(date);
+          handleApiResponse(data);
+        } catch (error) {
+          setError("Failed to load image for the selected date");
+        }
+      }, 500);
+    };
   }, []);
 
-  // todo: resolve this:
-  // api source changed to the one below (due to original stopped working)... not sure error handling works anymore.
+  const loadImageByDateDebounced = debouncedFetchByDate();
 
-  // bring out the api functions to api.js
-
-  // maybe bring back original api source as it seems to be working again, and use this one as a backup.
-  // (use api2 if api1 doesn't respond in X seconds)
-
-  const baseUrl = "https://apod.ellanan.com/api";
-
-  // fetch data, customize output by modifying url parameter
-  async function fetchData(url) {
-    setImgLoaded(false);
-    setError(null);
-    setFetchedData(null);
-
-    // todo:
-    // change this logic (when an image that is already liked turns up):
-    setImgLiked(false);
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-
-      console.log("1", response.status);
-
-      console.log("2", data);
-
-      if (response.status != 200) {
-        setError(data.msg); // the error message provided in the object)
-      } else {
-        // data comes as an object or as an array (each index containing an object)
-        let dataChecked;
-        if (Array.isArray(data)) {
-          dataChecked = data[0];
-        } else {
-          dataChecked = data;
-        }
-
-        setFetchedData(dataChecked);
-
-        // append image, skip videos.
-        if (dataChecked.media_type === "image") {
-          setFetchedData(dataChecked);
-        } else if (dataChecked.media_type === "video") {
-          setError("No image available on the chosen day.");
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const handleDateInputChange = (event) => {
+    const date = event.target.value;
+    setInputDate(date);
+    loadImageByDateDebounced(date);
+  };
 
   return (
     <main className={styles.home}>
@@ -132,11 +137,9 @@ function Home() {
 
       <Footer
         ref={footerRef}
-        onClickRandomButton={() => fetchData(baseUrl + "?count=1")}
-        onChangeDateInput={(event) =>
-          fetchData(baseUrl + "?date=" + event.target.value)
-        }
-        imageDate={fetchedData ? fetchedData.date : null}
+        onClickRandomButton={loadRandomImage}
+        onChangeDateInput={handleDateInputChange}
+        imageDate={inputDate}
       />
 
       <TransitionAnimation />
