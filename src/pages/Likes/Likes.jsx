@@ -5,6 +5,7 @@ import ImageCardWithFrame from "../../components/ImageCardWithFrame/ImageCardWit
 import Header from "../../components/Header/Header";
 // services:
 import {
+  clearFavorites,
   getFavoritesFromLocalStorage,
   removeFromFavorites,
 } from "../../services/utils";
@@ -17,6 +18,13 @@ const Likes = () => {
   const handleRemove = (favorite) => {
     removeFromFavorites(favorite);
     setFavorites(getFavoritesFromLocalStorage());
+  };
+
+  const handleClear = () => {
+    if (window.confirm("Are you sure you want to clear all likes?")) {
+      clearFavorites();
+      setFavorites(getFavoritesFromLocalStorage());
+    }
   };
 
   return (
@@ -38,9 +46,15 @@ const Likes = () => {
             );
           })
         ) : (
-          <p className={styles.noLikes}>You haven't liked any images yet...</p>
+          <p className={styles.noLikes}>
+            You haven&apos;t liked any images yet...
+          </p>
         )}
       </div>
+
+      <button onClick={handleClear} className={styles.clearButton}>
+        Clear Likes
+      </button>
 
       <TransitionAnimation />
     </main>
