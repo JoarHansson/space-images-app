@@ -6,8 +6,9 @@ main.likes {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
   min-height: 100vh;
+  padding-bottom: 2rem;
 }
 
 .container {
