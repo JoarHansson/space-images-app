@@ -2,9 +2,13 @@
 
 Are you here to make Space Images better? Awesome!
 
+Do you want to practice your skills in React, JavaScript and CSS? Great!
+
+Space Images is used as a learning project with focus on clean code and consistent structure. If you want to practise any of the techniques used in the project, this is a great place to do so.
+
 ## Proposing a Change
 
-Feel free to submit an issue with or without a PR if you found a bug or if there is something you think should be improved.
+Feel free to create an issue with or without a PR if you found a bug or if there is some feature you think should be added, or if there is something else you think could be improved. Anything is welcome.
 
 ## Issues
 
