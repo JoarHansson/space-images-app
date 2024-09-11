@@ -51,3 +51,7 @@ export const removeFromFavorites = (itemToRemove) => {
 
   localStorage.setItem("favorites", JSON.stringify(favorites));
 };
+
+export const clearFavorites = () => {
+  localStorage.removeItem("favorites");
+};
