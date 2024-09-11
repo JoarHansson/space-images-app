@@ -9,7 +9,7 @@
 .heartRed {
   height: 2rem;
   width: 2rem;
-  fill: var(--text);
+  fill: var(--primary);
   stroke: none;
 }
 

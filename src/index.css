@@ -1,9 +1,10 @@
+/* color theme */
 :root {
   --bg-color: #111016;
   --bg-color-darker: #050508;
   --bg-color-darker-semi-transparent: #05050880;
-  --text: #e0bf00;
-  --text-hover: #ffd900;
+  --primary: #e0bf00;
+  --primary-hover: #ffd900;
 
   --inactive-grey: #8b8b92;
 
@@ -23,7 +24,7 @@
 p {
   font-weight: 700;
   background: none;
-  color: var(--text);
+  color: var(--primary);
   text-decoration: none;
   text-transform: none;
   margin: 0;
@@ -50,7 +51,7 @@ body,
 /* scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--text) var(--bg-color);
+  scrollbar-color: var(--primary) var(--bg-color);
 }
 
 ::-webkit-scrollbar {
@@ -59,7 +60,7 @@ body,
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--text);
+  background: var(--primary);
 }
 
 ::-webkit-scrollbar-button {

@@ -22,7 +22,7 @@
 
 .infoButton {
   background: none;
-  color: var(--text);
+  color: var(--primary);
   display: flex;
   justify-content: center;
   align-items: center;

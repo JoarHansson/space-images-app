@@ -1,11 +1,11 @@
 .date {
   padding: 0.5rem 1rem;
-  background-color: var(--text);
+  background-color: var(--primary);
   color: var(--bg-color-darker);
 }
 
 .date:hover {
-  background-color: var(--text-hover);
+  background-color: var(--primary-hover);
 }
 
 @media screen and (max-width: 900px) {
