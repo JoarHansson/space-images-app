@@ -10,7 +10,7 @@ const Index = () => {
       <h1 className={styles.h1}>Space Images</h1>
 
       <div className={styles.flexContainer}>
-        <Button isLink={true} linkTo={"home"}>
+        <Button isLink={true} linkTo={"explore"}>
           Explore images
         </Button>
 

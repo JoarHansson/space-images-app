@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useLocation, Routes, Route } from "react-router-dom";
 // pages:
 import Index from "./pages/Index/Index";
-import Home from "./pages/Home/Home";
+import Explore from "./pages/Explore/Explore";
 import Likes from "./pages/Likes/Likes";
 import NotFound from "./pages/NotFound/NotFound";
 // css/font:
@@ -19,7 +19,7 @@ export default function App() {
       <Routes location={location} key={location.pathname}>
         {/* Routes */}
         <Route index element={<Index />} />
-        <Route path="home" element={<Home />} />
+        <Route path="explore" element={<Explore />} />
         <Route path="likes" element={<Likes />} />
 
         {/* 404 page */}

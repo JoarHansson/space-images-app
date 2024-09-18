@@ -6,12 +6,12 @@ import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation
 import TransitionAnimation from "../../components/TransitionAnimation/TransitionAnimation.jsx";
 import ImageCard from "../../components/ImageCard/ImageCard.jsx";
 // services:
-import { addToFavorites, removeFromFavorites } from "../../services/utils";
-import { fetchRandomImage, fetchImageByDate } from "../../services/api";
+import { addToFavorites, removeFromFavorites } from "../../services/utils.js";
+import { fetchRandomImage, fetchImageByDate } from "../../services/api.js";
 // css:
-import styles from "./Home.module.css";
+import styles from "./Explore.module.css";
 
-function Home() {
+function Explore() {
   const headerRef = useRef(null);
   const footerRef = useRef(null);
   const containerImageRef = useRef(null);
@@ -106,7 +106,7 @@ function Home() {
   };
 
   return (
-    <main className={styles.home}>
+    <main className={styles.explore}>
       <Header ref={headerRef} />
 
       <div ref={containerImageRef} className={styles.outerImageContainer}>
@@ -147,4 +147,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Explore;
