@@ -20,12 +20,12 @@ const Header = React.forwardRef((props, ref) => {
           start
         </Link>
         <Link
-          to={"/home"}
+          to={"/explore"}
           className={`${styles.link} ${
-            location.pathname === "/home" && styles.underlined
+            location.pathname === "/explore" && styles.underlined
           }`}
         >
-          home
+          explore
         </Link>
         <Link
           to={"/likes"}
