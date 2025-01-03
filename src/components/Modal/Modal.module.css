@@ -1,0 +1,62 @@
+.wrapper {
+  background-color: var(--backdrop);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 1.5rem 1rem;
+}
+
+.close {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.buttonsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.buttons {
+  width: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button {
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  color: white;
+}
+
+.actionButton {
+  background-color: var(--primary);
+  &:hover {
+    color: var(--primary-hover);
+  }
+}
+
+.closeButton {
+  background-color: var(--error);
+  &:hover {
+    opacity: 0.9;
+  }
+}

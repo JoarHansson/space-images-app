@@ -4,6 +4,7 @@ import TransitionAnimation from "../../components/TransitionAnimation/Transition
 import ImageCardWithFrame from "../../components/ImageCardWithFrame/ImageCardWithFrame";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
+import Modal from "../../components/Modal/Modal";
 // services:
 import {
   clearFavorites,
@@ -24,43 +25,57 @@ const Likes = () => {
   };
 
   const handleClear = () => {
-    if (window.confirm("Are you sure you want to clear all likes?")) {
-      clearFavorites();
-      setFavorites(getFavoritesFromLocalStorage() || []);
-    }
+    clearFavorites();
+    setFavorites(getFavoritesFromLocalStorage() || []);
   };
 
   return (
-    <main className={styles.likes}>
-      <Header />
+    <Modal>
+      <main className={styles.likes}>
+        <Header />
 
-      <div className={styles.container}>
-        {favorites.length ? (
-          favorites.map((favorite) => {
-            return (
-              <div key={favorite.url}>
-                <ImageCardWithFrame
-                  imageData={favorite}
-                  imgLiked={true}
-                  imgLoaded={true}
-                  onClick={() => handleRemove(favorite)}
-                />
-              </div>
-            );
-          })
-        ) : (
-          <p className={styles.noLikes}>
-            You haven&apos;t liked any images yet...
-          </p>
+        <div className={styles.container}>
+          {favorites.length ? (
+            favorites.map((favorite) => {
+              return (
+                <div key={favorite.url}>
+                  <ImageCardWithFrame
+                    imageData={favorite}
+                    imgLiked={true}
+                    imgLoaded={true}
+                    onClick={() => handleRemove(favorite)}
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <p className={styles.noLikes}>
+              You haven&apos;t liked any images yet...
+            </p>
+          )}
+        </div>
+
+        {favorites.length > 0 && (
+          <Modal.Trigger modalName="clear-likes">
+            <Button>Clear Likes</Button>
+          </Modal.Trigger>
         )}
-      </div>
+        <Modal.Content modalName="clear-likes">
+          <div className={styles.clearLikesConfirmation}>
+            Are you sure you want to clear all likes?
+          </div>
 
-      {favorites.length > 0 && (
-        <Button onClick={handleClear}>Clear Likes</Button>
-      )}
+          <Modal.Buttons>
+            <Modal.CloseButton>No</Modal.CloseButton>
+            <Modal.ActionButton cb={() => handleClear()}>
+              Yes
+            </Modal.ActionButton>
+          </Modal.Buttons>
+        </Modal.Content>
 
-      <TransitionAnimation />
-    </main>
+        <TransitionAnimation />
+      </main>
+    </Modal>
   );
 };
 

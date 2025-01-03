@@ -7,6 +7,8 @@
   --primary-hover: #ffd900;
 
   --inactive-grey: #8b8b92;
+  --backdrop: #ffffff1a;
+  --error: #ff3838;
 
   --gradient0: #00ff7f;
   --gradient1: #006eff;
@@ -46,6 +48,10 @@ body,
 #root {
   height: 100vh;
   margin: 0;
+}
+
+body {
+  min-width: 250px;
 }
 
 /* scrollbar */
